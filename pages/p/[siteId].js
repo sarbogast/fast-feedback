@@ -5,6 +5,7 @@ import {useAuth} from '@/lib/auth';
 import Feedback from "@/components/Feedback";
 import {useEffect, useRef, useState} from "react";
 import {createFeedback} from "@/lib/db";
+import DeleteFeedbackButton from "@/components/DeleteFeedbackButton";
 
 export async function getStaticProps(context) {
     const siteId = context.params.siteId;
@@ -60,6 +61,10 @@ const FeedbackPage = ({initialFeedback}) => {
         createFeedback(newFeedback);
     }
 
+    const onDeleteFeedback = (feedbackId) => {
+        setAllFeedback((currentFeedback) => currentFeedback.filter((feedback) => feedback.id !== feedbackId));
+    }
+
     return (
         <Box
             display="flex"
@@ -80,7 +85,7 @@ const FeedbackPage = ({initialFeedback}) => {
                 </Box>
             )}
             {allFeedback && allFeedback.map((feedback) => (
-                <Feedback key={feedback.id || new Date().getTime().toString()} {...feedback}/>
+                <Feedback key={feedback.id || new Date().getTime().toString()} {...feedback} onDelete={onDeleteFeedback}/>
             ))}
         </Box>
     );
