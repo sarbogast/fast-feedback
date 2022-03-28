@@ -6,6 +6,7 @@ import Feedback from "@/components/Feedback";
 import {useEffect, useRef, useState} from "react";
 import {createFeedback} from "@/lib/db";
 import DeleteFeedbackButton from "@/components/DeleteFeedbackButton";
+import FeedbackRow from "@/components/FeedbackRow";
 
 export async function getStaticProps(context) {
     const siteId = context.params.siteId;
